@@ -1,4 +1,4 @@
-# PierConsoleDetective ![Console Detective](https://github.com/arunn/pier_console_detective/actions/workflows/ci.yml/badge.svg)[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7fabacab5ff445248655e1b9b35f1aef)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=arunn/pier_console_detective&amp;utm_campaign=Badge_Grade)[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/7fabacab5ff445248655e1b9b35f1aef)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=arunn/pier_console_detective&utm_campaign=Badge_Coverage)[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/arunn/pier_console_detective/graphs/commit-activity)
+# PierConsoleDetective
 
 A gem to track commands typed in rails console along with tagging in realtime. The tags can be used to identify users. This works with  [IRB](https://github.com/ruby/ruby/tree/master/lib/irb) and rails console using IRB. The values for tag, logger, and memoization requirements are configurable. 
 
