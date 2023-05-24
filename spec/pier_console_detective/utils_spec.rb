@@ -1,53 +1,56 @@
 require "spec_helper"
 
-RSpec.describe ConsoleDetective::Utils do
+RSpec.describe PierConsoleDetective::Utils do
   before(:each) do
     [:@logger, :@tag].each do |variable|
-      ConsoleDetective::Utils.remove_instance_variable(variable) if ConsoleDetective::Utils.instance_variables.include?(variable)
+      PierConsoleDetective::Utils.remove_instance_variable(variable) if PierConsoleDetective::Utils.instance_variables.include?(variable)
     end
     reset_pier_console_detective_to_defaults
   end
 
   it "sets up logger object with default filename" do
-    expect(ConsoleDetective::Utils.instance_variables).to be_empty
-    logger = ConsoleDetective::Utils.logger
-    expect(logger.instance_variable_get(:@logdev).filename).to eq ConsoleDetective.log_file_name
-    expect(ConsoleDetective::Utils.instance_variables).to eq [:@logger]
-    expect(ConsoleDetective::Utils.logger).to eq logger
+    expect(PierConsoleDetective::Utils.instance_variables).to be_empty
+    logger = PierConsoleDetective::Utils.logger
+    expect(logger).to eq PierConsoleDetective.logger
+    expect(PierConsoleDetective::Utils.instance_variables).to eq [:@logger]
+    expect(PierConsoleDetective::Utils.logger).to eq logger
   end
 
   it "sets up logger object with overriden filename" do
-    ConsoleDetective.setup do |config|
-      config.log_file_name = 'log/test_console.log'
+    PierConsoleDetective.setup do |config|
+      config.logger = Logger.new('log/test_console.log')
     end
-    expect(ConsoleDetective::Utils.instance_variables).to be_empty
-    logger = ConsoleDetective::Utils.logger
+    expect(PierConsoleDetective::Utils.instance_variables).to be_empty
+    logger = PierConsoleDetective::Utils.logger
     expect(logger.instance_variable_get(:@logdev).filename).to eq "log/test_console.log"
   end
 
   it "gets tag based on default config setup and is memoized" do
-    expect(ConsoleDetective::Utils.instance_variables).to be_empty
-    expect(ConsoleDetective::Utils.get_tag).to eq "#{ENV['USER']}"
-    ConsoleDetective.setup do |config|
-      config.log_tags = -> { 'nothing' }
+    expect(PierConsoleDetective::Utils.instance_variables).to be_empty
+    expect(PierConsoleDetective::Utils.get_tag).to eq "#{ENV['USER']}"
+    PierConsoleDetective.setup do |config|
+      config.log_tag = -> { 'nothing' }
     end
-    expect(ConsoleDetective::Utils.get_tag).to eq "#{ENV['USER']}"
+    expect(PierConsoleDetective::Utils.get_tag).to eq "#{ENV['USER']}"
   end
 
   it "gets tag based on modified setup and no memoization" do
-    expect(ConsoleDetective::Utils.instance_variables).to be_empty
-    expect(ConsoleDetective::Utils.get_tag).to eq "#{ENV['USER']}"
-    ConsoleDetective.setup do |config|
+    expect(PierConsoleDetective::Utils.instance_variables).to be_empty
+    expect(PierConsoleDetective::Utils.get_tag).to eq "#{ENV['USER']}"
+    PierConsoleDetective.setup do |config|
       config.tag_memoization = false
-      config.log_tags = -> { 'nothing' }
+      config.log_tag = -> { 'nothing' }
     end
-    expect(ConsoleDetective::Utils.get_tag).to eq "nothing"
+    expect(PierConsoleDetective::Utils.get_tag).to eq "nothing"
   end
 
   it "calls logger with tag and command in a thread if immediately is false" do
-    logger = ConsoleDetective::Utils.logger
-    expect(logger).to receive(:info).with({tag: ENV['USER'], command: 'command_test'})
-    thr = ConsoleDetective::Utils.log_command("command_test")
+    logger = PierConsoleDetective::Utils.logger
+    expect(logger).to receive(:info).with("Command executed", {
+      tag: ENV['USER'],
+      data: { command: '"command_test"' },
+    })
+    thr = PierConsoleDetective::Utils.log_command("command_test")
     expect(thr).to be_a(Thread)
     thr.join
     while(thr.alive?)
@@ -56,9 +59,12 @@ RSpec.describe ConsoleDetective::Utils do
   end
 
   it "calls logger with tag and command if immediately is true" do
-    logger = ConsoleDetective::Utils.logger
-    expect(logger).to receive(:info).with({tag: ENV['USER'], command: 'command_test'})
-    thr = ConsoleDetective::Utils.log_command("command_test", immediately: true)
+    logger = PierConsoleDetective::Utils.logger
+    expect(logger).to receive(:info).with("Command executed", {
+      tag: ENV['USER'], 
+      data: { command: '"command_test"' }
+    })
+    thr = PierConsoleDetective::Utils.log_command("command_test", immediately: true)
     expect(thr).not_to be_a(Thread)
   end
 end

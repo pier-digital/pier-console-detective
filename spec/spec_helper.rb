@@ -1,7 +1,6 @@
 require 'pier_console_detective_coverage'
 require "bundler/setup"
 require 'irb'
-require "dummy_console/pry"
 require 'byebug'
 require "pier_console_detective"
 
@@ -18,10 +17,9 @@ RSpec.configure do |config|
 end
 
 def reset_pier_console_detective_to_defaults
-  ConsoleDetective.setup do |config|
-    config.log_file_name    = "log/console.log"
-    config.log_tags         = -> { ENV['USER'] }
-    config.log_format       = -> (tag, command) { { tag: tag, command: command } }
+  PierConsoleDetective.setup do |config|
+    config.logger           = Logger.new(STDOUT)
+    config.log_tag         = -> { ENV['USER'] }
     config.tag_memoization  = true
   end
 end

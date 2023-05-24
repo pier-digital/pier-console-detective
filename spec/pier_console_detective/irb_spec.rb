@@ -1,9 +1,9 @@
 require "spec_helper"
 
-RSpec.describe "ConsoleDetective::Irb" do
+RSpec.describe "PierConsoleDetective::Irb" do
   it "calls log command when evaluate is called" do
     random_string = "random_string_irb"
-    expect(ConsoleDetective::Utils).to receive(:log_command).with("puts '#{random_string}';exit")
+    expect(PierConsoleDetective::Utils).to receive(:log_command).with("puts '#{random_string}';exit")
     File.open('tmp/commands.rb', 'w') {|file| file.truncate(0) }
     File.open("tmp/commands.rb", "w+") {|f| f.write("puts '#{random_string}';exit") }
     IRB.conf[:SCRIPT] = "tmp/commands.rb"
