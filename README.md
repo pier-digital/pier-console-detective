@@ -32,8 +32,6 @@ $ gem install pier_console_detective
 
 There are meaningful defaults for the config. If you are using rails, run `rails console`. Otherwise, `irb -rpier_console_detective` will load the respective consoles with `pier_console_detective` loaded. You can also modify `~/.irbrc` with `require pier_console_detective` to load the `pier_console_detective` by default.
 
-![demo_pier_console_detective](https://gist.githubusercontent.com/arunn/0a2795f1699c9e3c518ce20d7f5c1b16/raw/b20cb7d3aab4924311e59050a35237abd6a9a670/demo_pier_console_detective.gif)
-
 The configs can be overridden by creating a file named `pier_console_detective.rb` with following code.
 
 ~~~ruby
