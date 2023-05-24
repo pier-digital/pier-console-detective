@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pier_console_detective (0.2.0)
+    pier_console_detective (0.3.0)
 
 GEM
   remote: https://rubygems.org/

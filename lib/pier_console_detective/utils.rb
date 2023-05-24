@@ -2,15 +2,17 @@ require 'logger'
 
 module ConsoleDetective
   module Utils
-    LOGGER_PROC = ->(command) { ConsoleDetective::Utils.logger.info(ConsoleDetective.log_format.call(ConsoleDetective::Utils.get_tag, command)) }
+    LOGGER_PROC = ->(command) do
+      ConsoleDetective::Utils.logger.info("Command executed", command: command, tag: ConsoleDetective::Utils.get_tag)
+    end
 
     def self.logger
-      @logger ||= Logger.new(ConsoleDetective.log_file_name)
+      @logger ||= ConsoleDetective.logger
     end
 
     def self.get_tag
       return @tag if ConsoleDetective.tag_memoization && @tag
-      @tag = ConsoleDetective.log_tags.call
+      @tag = ConsoleDetective.log_tag.call
     end
 
     def self.log_command(command, immediately: false)
