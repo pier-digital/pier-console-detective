@@ -1,8 +1,11 @@
 module PierConsoleDetective
   module IrbLogger
     def evaluate(*args, **kw)
-      PierConsoleDetective::Utils.log_command(args.first.chomp)
-      super(*args, **kw)
+      input = args.first.chomp
+      PierConsoleDetective::Utils.log_command(input)
+      output = super(*args, **kw)
+      PierConsoleDetective::Utils.log_command_output(input, output)
+      output
     end
   end
 end

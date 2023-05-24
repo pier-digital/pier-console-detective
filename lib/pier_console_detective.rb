@@ -24,4 +24,3 @@ end
 
 require 'pier_console_detective/utils'
 require 'pier_console_detective/irb'
-require 'pier_console_detective/pry'

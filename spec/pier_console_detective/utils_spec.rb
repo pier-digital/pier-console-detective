@@ -46,7 +46,10 @@ RSpec.describe PierConsoleDetective::Utils do
 
   it "calls logger with tag and command in a thread if immediately is false" do
     logger = PierConsoleDetective::Utils.logger
-    expect(logger).to receive(:info).with("Command executed", {tag: ENV['USER'], command: 'command_test'})
+    expect(logger).to receive(:info).with("Command executed", {
+      tag: ENV['USER'],
+      data: { command: '"command_test"' },
+    })
     thr = PierConsoleDetective::Utils.log_command("command_test")
     expect(thr).to be_a(Thread)
     thr.join
@@ -57,7 +60,10 @@ RSpec.describe PierConsoleDetective::Utils do
 
   it "calls logger with tag and command if immediately is true" do
     logger = PierConsoleDetective::Utils.logger
-    expect(logger).to receive(:info).with("Command executed", {tag: ENV['USER'], command: 'command_test'})
+    expect(logger).to receive(:info).with("Command executed", {
+      tag: ENV['USER'], 
+      data: { command: '"command_test"' }
+    })
     thr = PierConsoleDetective::Utils.log_command("command_test", immediately: true)
     expect(thr).not_to be_a(Thread)
   end

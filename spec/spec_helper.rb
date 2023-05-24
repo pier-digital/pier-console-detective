@@ -1,7 +1,6 @@
 require 'pier_console_detective_coverage'
 require "bundler/setup"
 require 'irb'
-require "dummy_console/pry"
 require 'byebug'
 require "pier_console_detective"
 
