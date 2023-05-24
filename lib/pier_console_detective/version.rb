@@ -1,3 +1,3 @@
-module ConsoleDetective
+module PierConsoleDetective
   VERSION = "0.3.0".freeze
 end

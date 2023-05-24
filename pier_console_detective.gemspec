@@ -2,7 +2,7 @@ require_relative 'lib/pier_console_detective/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "pier_console_detective"
-  spec.version       = ConsoleDetective::VERSION
+  spec.version       = PierConsoleDetective::VERSION
   spec.authors       = ["ArunkumarN"]
   spec.email         = ["arunn@arunn.dev"]
   spec.licenses      = ["MIT"]

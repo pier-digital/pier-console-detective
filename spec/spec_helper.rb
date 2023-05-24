@@ -18,7 +18,7 @@ RSpec.configure do |config|
 end
 
 def reset_pier_console_detective_to_defaults
-  ConsoleDetective.setup do |config|
+  PierConsoleDetective.setup do |config|
     config.logger           = Logger.new(STDOUT)
     config.log_tag         = -> { ENV['USER'] }
     config.tag_memoization  = true

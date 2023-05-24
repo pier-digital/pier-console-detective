@@ -2,8 +2,8 @@ require "pier_console_detective/version"
 require "pier_console_detective/mod_attr_accessor"
 require "logger"
 
-module ConsoleDetective
-  extend ConsoleDetective::ModAttrAccessor
+module PierConsoleDetective
+  extend PierConsoleDetective::ModAttrAccessor
 
   def self.setup
     yield self

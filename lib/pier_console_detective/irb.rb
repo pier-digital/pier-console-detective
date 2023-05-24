@@ -1,10 +1,10 @@
-module ConsoleDetective
+module PierConsoleDetective
   module IrbLogger
     def evaluate(*args, **kw)
-      ConsoleDetective::Utils.log_command(args.first.chomp)
+      PierConsoleDetective::Utils.log_command(args.first.chomp)
       super(*args, **kw)
     end
   end
 end
 
-IRB::Context.prepend(ConsoleDetective::IrbLogger) if defined?(IRB::Context)
+IRB::Context.prepend(PierConsoleDetective::IrbLogger) if defined?(IRB::Context)

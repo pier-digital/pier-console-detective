@@ -1,7 +1,7 @@
 # Inspired and simplified from ActiveSupport's defintion of mattr_accessor
 # https://github.com/rails/rails/blob/5db5de534106a44070374810a99853f38843b1d2/activesupport/lib/active_support/core_ext/module/attribute_accessors.rb
 
-module ConsoleDetective
+module PierConsoleDetective
   module ModAttrAccessor
     def mod_attr_accessor(attr_name, default_value)
       class_eval(<<-EOS, __FILE__, __LINE__ + 1)
