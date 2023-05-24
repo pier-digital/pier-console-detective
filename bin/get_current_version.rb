@@ -1,1 +1,1 @@
-print Gem::Specification::load('pier_logging.gemspec').version.to_s
+print Gem::Specification::load('pier_console_detective.gemspec').version.to_s
